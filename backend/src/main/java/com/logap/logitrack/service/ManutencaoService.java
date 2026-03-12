@@ -55,5 +55,29 @@ public class ManutencaoService {
         Manutencao salva = manutencaoRepository.save(manutencao);
         return new ManutencaoResponseDTO(salva);
     }
+
+    @Transactional
+    public ManutencaoResponseDTO atualizar(Long id, ManutencaoRequestDTO dto) {
+        Manutencao manutencao = manutencaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Manutenção não encontrada!"));
+
+        manutencao.setDataInicio(dto.dataInicio());
+        manutencao.setDataFinalizacao(dto.dataFinalizacao());
+        manutencao.setTipoServico(dto.tipoServico());
+        manutencao.setCustoEstimado(dto.custoEstimado());
+        
+        if (dto.status() != null && !dto.status().isBlank()) {
+            manutencao.setStatus(dto.status());
+        }
+
+        return new ManutencaoResponseDTO(manutencaoRepository.save(manutencao));
+    }
+
+    @Transactional
+    public void deletar(Long id) {
+        Manutencao manutencao = manutencaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Manutenção não encontrada!"));
+        manutencaoRepository.delete(manutencao);
+    }
     
 }

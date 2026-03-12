@@ -33,4 +33,15 @@ public class ManutencaoController {
         ManutencaoResponseDTO criada = manutencaoService.criar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(criada); 
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ManutencaoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody ManutencaoRequestDTO dto) {
+        return ResponseEntity.ok(manutencaoService.atualizar(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        manutencaoService.deletar(id);
+        return ResponseEntity.noContent().build(); 
+    }
 }
