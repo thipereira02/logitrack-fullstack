@@ -10,7 +10,7 @@ CREATE TABLE veiculos (
 -- 2. Criação da Tabela de Viagens
 CREATE TABLE viagens (
     id BIGSERIAL PRIMARY KEY,
-    veiculo_id INTEGER REFERENCES veiculos(id) ON DELETE CASCADE,
+    veiculo_id BIGINT REFERENCES veiculos(id) ON DELETE CASCADE,
     data_saida TIMESTAMP NOT NULL,
     data_chegada TIMESTAMP,
     origem VARCHAR(100),
@@ -21,7 +21,7 @@ CREATE TABLE viagens (
 -- 3. Criação da Tabela de Manutenções
 CREATE TABLE manutencoes (
     id BIGSERIAL PRIMARY KEY,
-    veiculo_id INTEGER REFERENCES veiculos(id) ON DELETE CASCADE,
+    veiculo_id BIGINT REFERENCES veiculos(id) ON DELETE CASCADE,
     data_inicio DATE NOT NULL,
     data_finalizacao DATE,
     tipo_servico VARCHAR(100),
