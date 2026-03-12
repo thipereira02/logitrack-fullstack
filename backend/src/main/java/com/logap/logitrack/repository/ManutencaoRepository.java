@@ -11,4 +11,7 @@ public interface ManutencaoRepository extends JpaRepository<Manutencao, Long> {
 
     @Query("SELECT SUM(m.custoEstimado) FROM Manutencao m WHERE EXTRACT(MONTH FROM m.dataInicio) = :mes AND EXTRACT(YEAR FROM m.dataInicio) = :ano")
     BigDecimal somarCustoManutencoesPorMesEAno(@Param("mes") int mes, @Param("ano") int ano);
+
+    @Query(value = "SELECT * FROM manutencoes m WHERE m.status = 'PENDENTE' ORDER BY m.data_inicio ASC LIMIT 5", nativeQuery = true)
+    List<Manutencao> buscarProximasManutencoes();
 }
