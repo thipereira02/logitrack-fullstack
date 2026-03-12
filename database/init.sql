@@ -1,6 +1,6 @@
 -- 1. Criação da Tabela de Veículos
 CREATE TABLE veiculos (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     placa VARCHAR(10) UNIQUE NOT NULL,
     modelo VARCHAR(50) NOT NULL,
     tipo VARCHAR(20) CHECK (tipo IN ('LEVE', 'PESADO')), -- Exemplo de constraint
@@ -9,7 +9,7 @@ CREATE TABLE veiculos (
 
 -- 2. Criação da Tabela de Viagens
 CREATE TABLE viagens (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     veiculo_id INTEGER REFERENCES veiculos(id) ON DELETE CASCADE,
     data_saida TIMESTAMP NOT NULL,
     data_chegada TIMESTAMP,
@@ -20,7 +20,7 @@ CREATE TABLE viagens (
 
 -- 3. Criação da Tabela de Manutenções
 CREATE TABLE manutencoes (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     veiculo_id INTEGER REFERENCES veiculos(id) ON DELETE CASCADE,
     data_inicio DATE NOT NULL,
     data_finalizacao DATE,
