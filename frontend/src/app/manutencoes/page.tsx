@@ -1,6 +1,6 @@
 import AcoesManutencao from '@/components/AcoesManutencao';
 import NovaManutencaoModal from '@/components/NovaManutencaoModal';
-import { Wrench, Plus, Search, FileEdit, Trash2 } from 'lucide-react';
+import { Wrench, Search } from 'lucide-react';
 
 async function getManutencoes() {
   try {
@@ -94,7 +94,7 @@ export default async function ManutencoesPage() {
                       </span>
                     </td>
                     <td className="p-4 text-right">
-                      <AcoesManutencao id={manutencao.id} />
+                      <AcoesManutencao manutencao={manutencao} />
                     </td>
                   </tr>
                 ))
