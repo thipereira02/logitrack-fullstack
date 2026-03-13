@@ -122,8 +122,9 @@ export default function AcoesManutencao({ manutencao }: { manutencao: Manutencao
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Status</label>
                   <select value={status} onChange={(e) => setStatus(e.target.value)} className="w-full p-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm">
+                    <option value="PENDENTE">Pendente</option>
                     <option value="AGENDADA">Agendada</option>
-                    <option value="EM ANDAMENTO">Em Andamento</option>
+                    <option value="EM_ANDAMENTO">Em Andamento</option>
                     <option value="CONCLUÍDA">Concluída</option>
                     <option value="CANCELADA">Cancelada</option>
                   </select>
