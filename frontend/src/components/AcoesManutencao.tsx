@@ -4,16 +4,7 @@ import { Trash2, Edit, AlertTriangle, X } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-interface Manutencao {
-  id: number;
-  veiculoId: number;
-  tipoServico: string;
-  dataInicio: string;
-  dataFinalizacao: string | null;
-  custoEstimado: number;
-  status: string;
-}
+import { Manutencao } from '@/interfaces/Manutencao';
 
 export default function AcoesManutencao({ manutencao }: { manutencao: Manutencao }) {
   const router = useRouter();
