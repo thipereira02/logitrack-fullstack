@@ -1,4 +1,5 @@
 import { Wrench, Plus, Search, FileEdit, Trash2 } from 'lucide-react';
+import NovaManutencaoModal from '@/components/NovaManutencaoModal';
 
 async function getManutencoes() {
   try {
@@ -32,10 +33,7 @@ export default async function ManutencoesPage() {
           <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Manutenções</h1>
           <p className="text-slate-500 mt-1">Gerencie o histórico e os agendamentos da frota.</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
-          <Plus size={20} />
-          Nova Manutenção
-        </button>
+        <NovaManutencaoModal />
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
