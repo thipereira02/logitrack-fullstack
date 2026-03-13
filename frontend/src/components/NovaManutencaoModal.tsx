@@ -18,7 +18,7 @@ export default function NovaManutencaoModal() {
 
   useEffect(() => {
     if (isOpen) {
-      fetch("http://localhost:8080/api/veiculos")
+      fetch("/api/veiculos")
         .then((res) => res.json())
         .then((data) => setVeiculos(data))
         .catch(() => toast.error("Não foi possível carregar a frota."));
@@ -38,7 +38,7 @@ export default function NovaManutencaoModal() {
     };
 
     try {
-      const res = await fetch("http://localhost:8080/api/manutencoes", {
+      const res = await fetch("/api/manutencoes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
