@@ -30,7 +30,7 @@ export default function NovaManutencaoModal() {
     setLoading(true);
 
     const payload = {
-      veiculo: { id: Number(veiculoId) },
+      veiculoId: Number(veiculoId),
       tipoServico,
       dataInicio,
       custoEstimado: Number(custoEstimado),
