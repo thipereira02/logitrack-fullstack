@@ -11,6 +11,7 @@ public record ManutencaoRequestDTO(
         Long veiculoId,
         
         @NotNull(message = "A data de início é obrigatória")
+        @FutureOrPresent
         LocalDate dataInicio,
         
         LocalDate dataFinalizacao,

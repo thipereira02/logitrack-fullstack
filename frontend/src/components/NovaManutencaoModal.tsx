@@ -16,6 +16,8 @@ export default function NovaManutencaoModal() {
   const [dataInicio, setDataInicio] = useState("");
   const [custoEstimado, setCustoEstimado] = useState("");
 
+  const hoje = new Date().toISOString().split("T")[0];
+
   useEffect(() => {
     if (isOpen) {
       fetch("/api/veiculos")
@@ -107,6 +109,7 @@ export default function NovaManutencaoModal() {
                   <label className="block text-sm font-medium text-slate-700 mb-1">Data Prevista</label>
                   <input 
                     type="date" required
+                    min={hoje}
                     value={dataInicio} onChange={(e) => setDataInicio(e.target.value)}
                     className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-slate-700"
                   />
