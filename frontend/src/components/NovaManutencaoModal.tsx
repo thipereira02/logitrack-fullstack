@@ -87,7 +87,7 @@ export default function NovaManutencaoModal() {
                   className="w-full p-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                 >
                   <option value="">Selecione um veículo...</option>
-                  {veiculos.map((v: any) => (
+                  {Array.isArray(veiculos) && veiculos.map((v: any) => (
                     <option key={v.id} value={v.id}>{v.modelo} ({v.placa})</option>
                   ))}
                 </select>

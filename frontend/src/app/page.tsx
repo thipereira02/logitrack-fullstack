@@ -3,7 +3,7 @@ import VolumeChart from '@/components/VolumeChart';
 
 async function getDashboardData() {
   try {
-    const res = await fetch('http://localhost:8080/api/dashboard', { cache: 'no-store' });
+    const res = await fetch('http://127.0.0.1:8080/api/dashboard', { cache: 'no-store' });
     if (!res.ok) throw new Error('Falha ao buscar dados');
     return res.json();
   } catch (error) {

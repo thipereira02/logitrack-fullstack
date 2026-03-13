@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/veiculos")
+@CrossOrigin(originPatterns = "*", maxAge = 3600)
 public class VeiculoController {
 
     @Autowired

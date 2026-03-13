@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/manutencoes")
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "*", maxAge = 3600)
 public class ManutencaoController {
 
     private final ManutencaoService manutencaoService;
