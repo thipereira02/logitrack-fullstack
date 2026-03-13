@@ -1,8 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Uma cor de fundo suave para toda a aplicação dar destaque aos cards brancos */
 body {
   background-color: #f8fafc;
   color: #0f172a;
