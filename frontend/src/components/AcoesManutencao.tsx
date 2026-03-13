@@ -5,12 +5,6 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface Veiculo {
-  id: number;
-  modelo?: string;
-  placa?: string;
-}
-
 interface Manutencao {
   id: number;
   veiculoId: number;
