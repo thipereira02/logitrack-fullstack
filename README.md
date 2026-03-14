@@ -9,6 +9,8 @@ O **LogiTrack Pro** é um MVP (Mínimo Produto Viável) de um sistema web desenv
 
 Este projeto foi desenvolvido como solução para o Desafio Técnico da LogAp I.T. Solutions.
 
+---
+
 ## ⚙️ Funcionalidades Implementadas
 
 Atendendo rigorosamente aos requisitos do desafio, o sistema contempla:
@@ -25,6 +27,19 @@ Painel estratégico focado em 5 métricas extraídas via consultas SQL:
 * **Cronograma de Manutenção:** Listagem das próximas 5 manutenções agendadas, ordenadas por data.
 * **Ranking de Utilização:** Identificação do veículo com a maior soma de quilometragem.
 * **Projeção Financeira:** Soma do custo total estimado em manutenções para o mês atual.
+
+---
+
+## 📸 Demonstração
+
+### Dashboard estratégico
+<img src="./assets/dashboard.png" alt="Dashboard LogiTrack" width="800">
+
+### Gestão de Manutenções (Tabela e Busca)
+<img src="./assets/manutencoes.png" alt="Tabela de Manutenções" width="800">
+
+### Cadastro e Edição
+<img src="./assets/modal.png" alt="Modal de Manutenção" width="800">
 
 ---
 
@@ -71,3 +86,6 @@ Para facilitar a avaliação e o setup do ambiente, utilizamos o Docker para orq
     npm run dev
     ```
     Acesse a aplicação no navegador em http://localhost:3000.
+
+---
+*Projeto desenvolvido por Thiago Pereira - 2026*
