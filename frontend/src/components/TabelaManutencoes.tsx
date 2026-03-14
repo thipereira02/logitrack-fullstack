@@ -1,8 +1,14 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import AcoesManutencao from './AcoesManutencao';
-import { Wrench, Search, ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react';
+import {
+  Wrench,
+  Search,
+  ArrowUpDown,
+  ChevronUp,
+  ChevronDown,
+} from 'lucide-react';
 import { Manutencao } from '@/interfaces/Manutencao';
 
 type Ordenacao = {
@@ -10,12 +16,19 @@ type Ordenacao = {
   direcao: 'asc' | 'desc';
 } | null;
 
-export default function TabelaManutencoes({ manutencoes }: { manutencoes: Manutencao[] }) {
-  const [busca, setBusca] = useState("");
+export default function TabelaManutencoes({
+  manutencoes,
+}: {
+  manutencoes: Manutencao[];
+}) {
+  const [busca, setBusca] = useState('');
   const [ordenacao, setOrdenacao] = useState<Ordenacao>(null);
 
   const formatarMoeda = (valor: number) => {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor || 0);
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(valor || 0);
   };
 
   const formatarData = (dataString: string | null) => {
@@ -25,24 +38,24 @@ export default function TabelaManutencoes({ manutencoes }: { manutencoes: Manute
   };
 
   const statusColors: Record<string, string> = {
-    PENDENTE: "bg-purple-50 text-purple-700 border-purple-200",
-    AGENDADA: "bg-blue-50 text-blue-700 border-blue-200",
-    EM_ANDAMENTO: "bg-amber-50 text-amber-700 border-amber-200",
-    CONCLUIDA: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    CANCELADA: "bg-red-50 text-red-700 border-red-200"
+    PENDENTE: 'bg-purple-50 text-purple-700 border-purple-200',
+    AGENDADA: 'bg-blue-50 text-blue-700 border-blue-200',
+    EM_ANDAMENTO: 'bg-amber-50 text-amber-700 border-amber-200',
+    CONCLUIDA: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    CANCELADA: 'bg-red-50 text-red-700 border-red-200',
   };
 
   const statusLabels: Record<string, string> = {
-    PENDENTE: "Pendente",
-    AGENDADA: "Agendada",
-    EM_ANDAMENTO: "Em Andamento",
-    CONCLUIDA: "Concluída",
-    CANCELADA: "Cancelada"
+    PENDENTE: 'Pendente',
+    AGENDADA: 'Agendada',
+    EM_ANDAMENTO: 'Em Andamento',
+    CONCLUIDA: 'Concluída',
+    CANCELADA: 'Cancelada',
   };
 
   const handleOrdenar = (coluna: keyof Manutencao) => {
     let novaDirecao: 'asc' | 'desc' = 'asc';
-    
+
     if (ordenacao && ordenacao.coluna === coluna) {
       if (ordenacao.direcao === 'asc') {
         novaDirecao = 'desc';
@@ -55,16 +68,19 @@ export default function TabelaManutencoes({ manutencoes }: { manutencoes: Manute
   };
 
   const renderIconeOrdenacao = (coluna: keyof Manutencao) => {
-    if (ordenacao?.coluna !== coluna) return <ArrowUpDown size={14} className="text-slate-300 ml-1" />;
-    return ordenacao.direcao === 'asc' 
-      ? <ChevronUp size={14} className="text-blue-600 ml-1" /> 
-      : <ChevronDown size={14} className="text-blue-600 ml-1" />;
+    if (ordenacao?.coluna !== coluna)
+      return <ArrowUpDown size={14} className="ml-1 text-slate-300" />;
+    return ordenacao.direcao === 'asc' ? (
+      <ChevronUp size={14} className="ml-1 text-blue-600" />
+    ) : (
+      <ChevronDown size={14} className="ml-1 text-blue-600" />
+    );
   };
 
-  let dadosProcessados = manutencoes.filter((m) => {
+  const dadosProcessados = manutencoes.filter((m) => {
     const termo = busca.toLowerCase();
-    const placa = m.veiculoPlaca ? m.veiculoPlaca.toLowerCase() : "";
-    const servico = m.tipoServico ? m.tipoServico.toLowerCase() : "";
+    const placa = m.veiculoPlaca ? m.veiculoPlaca.toLowerCase() : '';
+    const servico = m.tipoServico ? m.tipoServico.toLowerCase() : '';
     return placa.includes(termo) || servico.includes(termo);
   });
 
@@ -89,62 +105,92 @@ export default function TabelaManutencoes({ manutencoes }: { manutencoes: Manute
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-      
-      <div className="p-4 border-b border-slate-100 flex items-center gap-3">
-        <div className="relative flex-1 max-w-md">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+    <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm">
+      <div className="flex items-center gap-3 border-b border-slate-100 p-4">
+        <div className="relative max-w-md flex-1">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
             <Search size={18} />
           </div>
-          <input 
-            type="text" 
-            placeholder="Buscar por placa ou serviço..." 
+          <input
+            type="text"
+            placeholder="Buscar por placa ou serviço..."
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-shadow"
+            className="w-full rounded-lg border border-slate-200 py-2 pr-4 pl-10 text-sm transition-shadow focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
+        <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="bg-slate-50 border-b border-slate-100 text-xs text-slate-500 uppercase tracking-wider select-none">
+            <tr className="border-b border-slate-100 bg-slate-50 text-xs tracking-wider text-slate-500 uppercase select-none">
               <th className="px-6 py-4 font-semibold">Veículo</th>
               <th className="px-6 py-4 font-semibold">Serviço</th>
-              
-              <th className="px-6 py-4 font-semibold cursor-pointer hover:bg-slate-100 transition-colors" onClick={() => handleOrdenar('dataInicio')}>
-                <div className="flex items-center">Data Início {renderIconeOrdenacao('dataInicio')}</div>
+
+              <th
+                className="cursor-pointer px-6 py-4 font-semibold transition-colors hover:bg-slate-100"
+                onClick={() => handleOrdenar('dataInicio')}
+              >
+                <div className="flex items-center">
+                  Data Início {renderIconeOrdenacao('dataInicio')}
+                </div>
               </th>
-              <th className="px-6 py-4 font-semibold cursor-pointer hover:bg-slate-100 transition-colors" onClick={() => handleOrdenar('custoEstimado')}>
-                <div className="flex items-center">Custo {renderIconeOrdenacao('custoEstimado')}</div>
+              <th
+                className="cursor-pointer px-6 py-4 font-semibold transition-colors hover:bg-slate-100"
+                onClick={() => handleOrdenar('custoEstimado')}
+              >
+                <div className="flex items-center">
+                  Custo {renderIconeOrdenacao('custoEstimado')}
+                </div>
               </th>
-              <th className="px-6 py-4 font-semibold cursor-pointer hover:bg-slate-100 transition-colors" onClick={() => handleOrdenar('status')}>
-                <div className="flex items-center">Status {renderIconeOrdenacao('status')}</div>
+              <th
+                className="cursor-pointer px-6 py-4 font-semibold transition-colors hover:bg-slate-100"
+                onClick={() => handleOrdenar('status')}
+              >
+                <div className="flex items-center">
+                  Status {renderIconeOrdenacao('status')}
+                </div>
               </th>
-              
-              <th className="px-6 py-4 font-semibold text-right">Ações</th>
+
+              <th className="px-6 py-4 text-right font-semibold">Ações</th>
             </tr>
           </thead>
-          <tbody className="text-sm text-slate-700 divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 text-sm text-slate-700">
             {dadosProcessados.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-12 text-center text-slate-500">
+                <td
+                  colSpan={6}
+                  className="px-6 py-12 text-center text-slate-500"
+                >
                   <div className="flex flex-col items-center justify-center">
-                    <Wrench size={32} className="text-slate-300 mb-3" />
-                    <p className="font-medium text-slate-600">Nenhuma manutenção encontrada</p>
+                    <Wrench size={32} className="mb-3 text-slate-300" />
+                    <p className="font-medium text-slate-600">
+                      Nenhuma manutenção encontrada
+                    </p>
                   </div>
                 </td>
               </tr>
             ) : (
               dadosProcessados.map((manutencao) => (
-                <tr key={manutencao.id} className="hover:bg-slate-50/80 transition-colors">
-                  <td className="px-6 py-4 font-medium text-slate-900">{manutencao.veiculoPlaca}</td>
+                <tr
+                  key={manutencao.id}
+                  className="transition-colors hover:bg-slate-50/80"
+                >
+                  <td className="px-6 py-4 font-medium text-slate-900">
+                    {manutencao.veiculoPlaca}
+                  </td>
                   <td className="px-6 py-4">{manutencao.tipoServico}</td>
-                  <td className="px-6 py-4 text-slate-500">{formatarData(manutencao.dataInicio)}</td>
-                  <td className="px-6 py-4 font-medium">{formatarMoeda(manutencao.custoEstimado)}</td>
+                  <td className="px-6 py-4 text-slate-500">
+                    {formatarData(manutencao.dataInicio)}
+                  </td>
+                  <td className="px-6 py-4 font-medium">
+                    {formatarMoeda(manutencao.custoEstimado)}
+                  </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-semibold tracking-wide border ${statusColors[manutencao.status] || 'bg-slate-50 text-slate-700 border-slate-200'}`}>
+                    <span
+                      className={`rounded-full border px-2.5 py-1 text-xs font-semibold tracking-wide ${statusColors[manutencao.status] || 'border-slate-200 bg-slate-50 text-slate-700'}`}
+                    >
                       {statusLabels[manutencao.status] || manutencao.status}
                     </span>
                   </td>
