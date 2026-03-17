@@ -53,27 +53,41 @@ Optamos por uma stack moderna e uma separação estrita de responsabilidades, al
 
 ---
 
+## 📋 Pré-requisitos
+
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas na sua máquina:
+* **Java 17** ou superior
+* **Node.js** (v18 ou superior)
+* **Docker** e **Docker Compose** (Para subir o banco de dados)
+
+---
+
 ## 🚀 Como Configurar e Rodar o Projeto Localmente
 
-Para facilitar a avaliação e o setup do ambiente, utilizamos o Docker para orquestrar o banco de dados (Diferencial DevOps). Siga o passo a passo abaixo:
+Para facilitar a avaliação e o setup do ambiente, utilizamos o Docker para orquestrar o banco de dados (Diferencial DevOps). Siga o passo a passo abaixo estritamente nesta ordem:
 
 ### Passo 1: Subir a Infraestrutura (Banco de Dados via Docker)
-1. Certifique-se de ter o **Docker** e o **Docker Compose** instalados na sua máquina.
+1. Certifique-se de que o Docker está rodando na sua máquina.
 2. Na raiz do projeto, execute o comando:
    ```bash
    docker-compose up -d
    ```
-3. Este comando irá baixar a imagem do PostgreSQL e subir o banco de dados logitrack_db com as credenciais já configuradas e necessárias para a aplicação.
+3. **Aguarde cerca de 10 segundos** antes de ir para o próximo passo. O PostgreSQL precisa desse tempo para inicializar e executar o script SQL de criação das tabelas pela primeira vez.
 
-*(Nota: Se preferir não utilizar o Docker, você precisará criar um banco PostgreSQL local manualmente e configurar as credenciais verificando o arquivo src/main/resources/application.properties do back-end).*
+    *(Nota: Se preferir não utilizar o Docker, crie um banco PostgreSQL local manualmente com o nome logitrack_db e configure as credenciais verificando o arquivo src/main/resources/application.properties do back-end).*
 
 ### Passo 2: Back-end (Spring Boot)
 1. Navegue até a pasta do back-end.
-2. Execute o projeto com o Maven:
+2. Caso esteja usando Linux ou macOS, dê permissão de execução ao Maven Wrapper:
     ```bash
-   ./mvnw spring-boot:run
-   ```
-   A API estará rodando em http://localhost:8080.
+    chmod +x mvnw
+    ```
+3. Execute o projeto:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+    *A API estará rodando em http://localhost:8080.*
 
 ### Passo 3: Front-end (Next.js)
 1. Abra um novo terminal e navegue até a pasta do front-end.
@@ -85,7 +99,8 @@ Para facilitar a avaliação e o setup do ambiente, utilizamos o Docker para orq
     ```bash
     npm run dev
     ```
-    Acesse a aplicação no navegador em http://localhost:3000.
+
+    *Acesse a aplicação no navegador em http://localhost:3000.*
 
 ---
 *Projeto desenvolvido por Thiago Pereira - 2026*
