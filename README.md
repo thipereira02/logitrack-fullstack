@@ -74,6 +74,12 @@ Para facilitar a avaliação e o setup do ambiente, utilizamos o Docker para orq
    ```
 3. **Aguarde cerca de 10 segundos** antes de ir para o próximo passo. O PostgreSQL precisa desse tempo para inicializar e executar o script SQL de criação das tabelas pela primeira vez.
 
+    **⚠️ Solução de Problemas (Troubleshooting):** Se o Spring Boot apresentar erro de "Schema-validation: missing table", significa que o Docker ignorou o script de inicialização devido a um cache de volume de uma tentativa anterior. Para resolver isso, limpe o volume do contêiner e suba novamente rodando:
+    ```bash
+    docker-compose down -v
+    docker-compose up -d
+    ```
+
     *(Nota: Se preferir não utilizar o Docker, crie um banco PostgreSQL local manualmente com o nome logitrack_db e configure as credenciais verificando o arquivo src/main/resources/application.properties do back-end).*
 
 ### Passo 2: Back-end (Spring Boot)
